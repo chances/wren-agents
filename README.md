@@ -1,4 +1,4 @@
-# Wren Documentation Generator
+# wren-agents
 
 Agent-based modeling (ABM) framework for [Wren](https://wren.io) applications.
 
@@ -7,8 +7,10 @@ environment (including other agents) given a predefined set of rules <sup>[[1](h
 agent-based model.
 
 ## Features
-- `Agent` base-class library
-- 
+- Base-class library (BCL) to create agent-based models
+- `Space` base-class to represent the area agents occupy, including these implementations:
+  - `Grid` - 2D areas of a given size
+  - `Graph` - Network of agents
 
 ## Prior Art
 - [agents.jl](https://juliadynamics.github.io/Agents.jl/stable)
