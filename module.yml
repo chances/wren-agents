@@ -5,4 +5,5 @@ author: Chance Snow <git@chancesnow.me>
 license: MIT
 entry: agents.wren
 tests: src/**/*.spec.wren
+dependencies: [wren-vector]
 devDependencies: [wren-assert, wren-package]
