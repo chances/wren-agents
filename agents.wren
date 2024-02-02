@@ -12,18 +12,88 @@
 /// License: MIT License
 
 /// An autonomous agent that behave given a set of rules.
-class Agent {}
+class Agent {
+  construct create() {
+    _time = 0
+    _location = null
+  }
+
+  /// The current agent-local time. Akin to a stopwatch counting up from zero.
+  /// Returns: Num
+  time { _time }
+
+  /// @virtual
+  /// Returns: void
+  tick() {}
+}
 
 /// Represents a speific model, i.e. its agents and the space they share, by mapping unique IDs (integers) to agent
 /// instances.
 ///
 /// During simulation, the model evolves in discrete steps.
-class World {}
+class World {
+  /// Params: space: Space
+  construct create(space) {
+    _time = 0
+    _space = space
+    _agents = {}
+  }
 
-/// A specific area in which `Agent`s occupy.
+  /// The current global time. Akin to a stopwatch counting up from zero.
+  /// Returns: Num
+  time { _time }
+
+  /// Returns: Space
+  space { _space }
+
+  /// Map of unique IDs to `Agent`s.
+  /// Warning: Do *NOT* mutate this map. Use `space.add(agent)`, `space.remove(agent)`, and `space.move(agent)` to
+  /// modify a world's agents.
+  /// Returns: Agent[Num]
+  agents { _agents }
+
+  /// @virtual
+  /// Returns: void
+  step() {
+    _time = _time + 1
+    // TODO: tick all of this world's agents
+  }
+}
+
+/// A specific area in which `Agent`s occupy. Base class of any `World`-space implementation.
 ///
 /// Provided examples include a `Grid`, and `Graph`.
-class Space {}
+///
+/// When creating custom spaces consider:
+/// 1. Type of an agent's position.
+/// 2. How agents near each other are represented, such that you can override the `neighbors` property.
+/// 3. Potential random values in the space, such that you can override `randomPosition`.
+///
+/// Then, define a new class and override these members:
+/// - `neighbors` property
+/// - `randomPosition` function
+/// - `add(agent)` function
+/// - `remove(agent)` function
+class Space {
+  /// @virtual
+  /// Returns: Agent[]
+  neighbors { [] }
+
+  /// @abstract
+  randomPosition() { null }
+
+  /// @abstract
+  /// Params: agent: Agent
+  add(agent) {}
+
+  /// @abstract
+  /// Params: agent: Agent
+  remove(agent) {}
+
+  /// @final
+  /// Params: agent: Agent
+  move(agent) {}
+}
 
 class Grid is Space {}
 
