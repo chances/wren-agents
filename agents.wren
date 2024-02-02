@@ -98,3 +98,30 @@ class Space {
 class Grid is Space {}
 
 class Graph is Space {}
+
+import "./wren_modules/wren-vector/vector" for Vector
+
+/// @final
+/// A position in a `World`'s space.
+/// See: `Space`
+class Pos {
+  /// `List` of valid types to represent an agent's position in a `Space`.
+  /// Returns: String[]
+  static validTypes {[
+    Num.name,
+    Map.name,
+    Vector.name
+  ]}
+
+  /// Params: pos: Num | Map | Vector
+  /// See: `validTypes`
+  construct at(pos) {
+    var valid = pos is Num || pos is Map || pos is Vector
+    if (!valid) Fiber.abort("Error: `%(pos)` is not a valid position type. See `Pos.validTypes`.")
+    _pos = pos
+  }
+
+  /// Returns: Num | Map | Vector
+  /// See: `Agent.location`
+  pos { _pos }
+}
