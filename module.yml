@@ -3,6 +3,6 @@ version: 0.1.0
 description: Agent-based modeling (ABM) framework for Wren apps
 author: Chance Snow <git@chancesnow.me>
 license: MIT
-entry: module.wren
+entry: agents.wren
 tests: src/**/*.spec.wren
 devDependencies: [wren-assert, wren-package]
