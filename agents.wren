@@ -11,6 +11,8 @@
 /// Copyright: Copyright © 2024 Chance Snow
 /// License: MIT License
 
+// TODO: Write a Jupyter kernel for Wren: https://jupyter-client.readthedocs.io/en/latest/kernels.html
+
 import "random" for Random
 
 /// An autonomous agent that behave given a set of rules.
@@ -129,6 +131,7 @@ class Space {
   /// @virtual
   /// Params: agentOrPos: Agent | Pos around which to find neighbors. If an `Agent` is given, it is excluded.
   /// Returns: Sequence<Agent>
+  /// See: Prior art: Agents.jl [`nearby_ids`](https://juliadynamics.github.io/Agents.jl/stable/api/#Agents.nearby_ids)
   neighbors(agentOrPos) { Fiber.abort("Error: `Space.neighbors(agentOrPos)` is abstract.") }
   /// Params:
   ///   agentOrPos: Agent | Pos around which to find neighbors. If an `Agent` is given, it is excluded.
